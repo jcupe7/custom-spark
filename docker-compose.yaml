@@ -20,7 +20,6 @@ services:
       - ./data:/data
       - ./output:/output
 
-
   spark-worker-1:
     image: docker.io/bitnami/spark:3.1
     container_name: "spark-worker-1"
@@ -33,7 +32,6 @@ services:
       - SPARK_RPC_ENCRYPTION_ENABLED=no
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
       - SPARK_SSL_ENABLED=no
-
 
   spark-worker-2:
     image: docker.io/bitnami/spark:3.1
@@ -48,3 +46,25 @@ services:
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
       - SPARK_SSL_ENABLED=no
 
+  # ----------------- #
+  # Apache Kafka      #
+  # ----------------- #
+  zookeeper:
+    image: docker.io/bitnami/zookeeper:3.8
+    ports:
+      - "2181:2181"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+
+
+  kafka:
+    image: docker.io/bitnami/kafka:3.3
+    ports:
+      - "9092:9092"
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    depends_on:
+      - zookeeper
+    volumes:
+      - ./producer:/producer

@@ -27,6 +27,21 @@ audio, sr = librosa.load('/data/miaudio1.wav')
 audio_rdd = sc.parallelize(audio) #RDD object
 
 processed_audio_rdd = audio_rdd.mapPartitions(process_audio).collect()
+processed_audio_rdd = audio_rdd.mapPartitions(process_audio).collect()
+processed_audio_rdd = audio_rdd.mapPartitions(process_audio).collect()
+processed_audio_rdd = audio_rdd.mapPartitions(process_audio).collect()
+processed_audio_rdd = audio_rdd.mapPartitions(process_audio).collect()
+
+# CONCATENAR
+
+
+# Espectograma
+map
+mapa
+#CNN2
+
+
+# FUNCION CNN1
 
 print('-------')
 print('-------')
@@ -38,3 +53,4 @@ print('-------')
 #processed_audio_rdd.saveAsTextFile(os.path.join(output_folder, "processed_audio.txt"))
 
 
+ssc.start()
